@@ -33,112 +33,130 @@ export default function Home() {
   return (
     <main className="min-h-screen pb-24 sm:pb-20 bg-black">
       {/* Header */}
-      <div className="border-b border-white/10 py-8 sm:py-12 px-3 sm:px-6 lg:px-8 backdrop-blur-sm">
-        <div className="mx-auto max-w-4xl text-center">
-          <h1 className="text-3xl sm:text-4xl lg:text-6xl font-bold font-playfair bg-gradient-to-r from-amber-400 via-yellow-300 to-amber-300 bg-clip-text text-transparent mb-3 sm:mb-4">
+      <div className="border-b border-white/10 py-12 sm:py-16 lg:py-20 px-3 sm:px-6 lg:px-8 backdrop-blur-sm">
+        <div className="mx-auto max-w-4xl text-center space-y-6">
+          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold font-playfair bg-gradient-to-r from-amber-400 via-yellow-300 to-amber-300 bg-clip-text text-transparent pt-4">
              Putero & Zarigüeya 
           </h1>
-          <p className="text-white/70 text-sm sm:text-base lg:text-lg leading-relaxed mb-3 sm:mb-4 px-2">
-            En esta plataforma podréis hacer acusaciones a lo largo del año de manera anónima y aportar fotografías + acusaciones para una mayor veracidad.
-          </p>
-          <p className="text-white/50 text-xs sm:text-sm lg:text-base px-2">
-            Todo para seguir haciendo que esta sea la mejor noche del puto año. 🎉
-          </p>
-          <p className="text-white/40 text-xs sm:text-sm mt-3 sm:mt-4 backdrop-blur-sm bg-white/5 rounded-lg py-2 sm:py-3 px-3 sm:px-4 inline-block">
-            🔐 Anonimato • ⚡ Directo • 📸 Sin límites
-          </p>
+          <div className="space-y-4">
+            <p className="text-white/70 text-sm sm:text-sm lg:text-base leading-relaxed px-2">
+              En esta plataforma podréis hacer acusaciones a lo largo del año de manera anónima y aportar fotografías + acusaciones para una mayor veracidad.
+            </p>
+            <p className="text-white/70 text-sm sm:text-sm lg:text-base leading-relaxed px-2">
+              Todo para seguir haciendo que esta sea la mejor noche del puto año. 🎉
+            </p>
+          </div>
+          <div className="pt-4">
+            <p className="text-white/60 text-xs sm:text-sm">
+              🔐 Anonimato total • ⚡ Envíos directos • 📸 Sin límites
+            </p>
+          </div>
         </div>
       </div>
 
       {/* Main Content */}
-      <div className="mx-auto max-w-4xl px-3 sm:px-6 lg:px-8 py-6 sm:py-12 space-y-6 sm:space-y-8">
+      <div className="mx-auto max-w-4xl px-3 sm:px-6 lg:px-8 py-10 sm:py-16 space-y-12 sm:space-y-16">
         {/* Tabs */}
-        <div className="flex gap-2 sm:gap-4 border-b border-white/10 overflow-x-auto pb-3 sm:pb-4">
-          <button
-            onClick={() => setActiveTab('acusacion')}
-            className={`px-3 sm:px-6 py-2 sm:py-4 font-semibold border-b-2 transition-all duration-300 whitespace-nowrap text-xs sm:text-sm md:text-base ${
-              activeTab === 'acusacion'
-                ? 'border-amber-400 text-amber-400'
-                : 'border-transparent text-white/60 hover:text-white'
-            }`}
-          >
-            📋 Acusación
-          </button>
-          <button
-            onClick={() => setActiveTab('fotos')}
-            className={`px-3 sm:px-6 py-2 sm:py-4 font-semibold border-b-2 transition-all duration-300 whitespace-nowrap text-xs sm:text-sm md:text-base ${
-              activeTab === 'fotos'
-                ? 'border-amber-400 text-amber-400'
-                : 'border-transparent text-white/60 hover:text-white'
-            }`}
-          >
-            📸 Fotos
-          </button>
-          <button
-            onClick={() => setActiveTab('galeria')}
-            className={`px-3 sm:px-6 py-2 sm:py-4 font-semibold border-b-2 transition-all duration-300 whitespace-nowrap text-xs sm:text-sm md:text-base ${
-              activeTab === 'galeria'
-                ? 'border-amber-400 text-amber-400'
-                : 'border-transparent text-white/60 hover:text-white'
-            }`}
-          >
-            🖼️ Galería
-          </button>
+        <div className="space-y-4">
+          <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
+            <button
+              onClick={() => setActiveTab('acusacion')}
+              className={`flex-1 px-4 sm:px-6 py-4 font-bold border-2 transition-all duration-300 rounded-lg text-sm sm:text-base ${
+                activeTab === 'acusacion'
+                  ? 'bg-amber-500/20 border-amber-400 text-amber-300 shadow-lg shadow-amber-500/30'
+                  : 'border-white/20 text-white/70 hover:border-white/40 hover:text-white hover:bg-white/5'
+              }`}
+            >
+              📋 Enviar Acusación
+            </button>
+            <button
+              onClick={() => setActiveTab('fotos')}
+              className={`flex-1 px-4 sm:px-6 py-4 font-bold border-2 transition-all duration-300 rounded-lg text-sm sm:text-base ${
+                activeTab === 'fotos'
+                  ? 'bg-purple-500/20 border-purple-400 text-purple-300 shadow-lg shadow-purple-500/30'
+                  : 'border-white/20 text-white/70 hover:border-white/40 hover:text-white hover:bg-white/5'
+              }`}
+            >
+              📸 Subir Fotos
+            </button>
+            <button
+              onClick={() => setActiveTab('galeria')}
+              className={`flex-1 px-4 sm:px-6 py-4 font-bold border-2 transition-all duration-300 rounded-lg text-sm sm:text-base ${
+                activeTab === 'galeria'
+                  ? 'bg-cyan-500/20 border-cyan-400 text-cyan-300 shadow-lg shadow-cyan-500/30'
+                  : 'border-white/20 text-white/70 hover:border-white/40 hover:text-white hover:bg-white/5'
+              }`}
+            >
+              🖼️ Mi Galería
+            </button>
+          </div>
         </div>
 
         {/* Tab Content */}
         {activeTab === 'acusacion' && (
-          <div className="space-y-4 sm:space-y-8 animate-slideIn">
-            <div className="bg-white/5 border border-white/10 rounded-lg p-4 sm:p-8 backdrop-blur-sm">
-              <div className="mb-4 sm:mb-8 text-center">
-                <h2 className="text-2xl sm:text-4xl font-bold text-white mb-2 sm:mb-3">Envía Una Acusación</h2>
-                <p className="text-white/60 text-sm sm:text-base leading-relaxed max-w-2xl mx-auto px-2">
-                  Escribe libremente tu acusación. Formato sugerido: "Acuso a [nombre] por [motivo]"
-                </p>
-                <div className="mt-3 sm:mt-4 inline-block text-xs text-white/40 bg-white/5 rounded-full px-3 sm:px-4 py-1 sm:py-2">
-                  💡 Tu identidad está protegida
+          <div className="space-y-8 animate-slideIn">
+            <div className="bg-white/5 border border-white/10 rounded-lg p-6 sm:p-10 backdrop-blur-sm space-y-8">
+              <div className="text-center space-y-4">
+                <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white">Envía Una Acusación</h2>
+                <div className="space-y-3">
+                  <p className="text-white/70 text-sm sm:text-base leading-relaxed">
+                    Escribe libremente tu acusación. Formato sugerido: "Acuso a [nombre] por [motivo]"
+                  </p>
+                  <p className="text-white/60 text-xs sm:text-sm">
+                    💡 Tu identidad está completamente protegida
+                  </p>
                 </div>
               </div>
-              <AccusationForm
-                onSuccess={() => {
-                  setRefreshGallery((prev) => prev + 1);
-                  setTimeout(() => setActiveTab('galeria'), 1500);
-                }}
-              />
+              <div className="pt-4">
+                <AccusationForm
+                  onSuccess={() => {
+                    setRefreshGallery((prev) => prev + 1);
+                    setTimeout(() => setActiveTab('galeria'), 1500);
+                  }}
+                />
+              </div>
             </div>
           </div>
         )}
 
         {activeTab === 'fotos' && (
-          <div className="space-y-4 sm:space-y-8 animate-slideIn">
-            <div className="bg-white/5 border border-white/10 rounded-lg p-4 sm:p-8 backdrop-blur-sm">
-              <div className="mb-4 sm:mb-8 text-center">
-                <h2 className="text-2xl sm:text-4xl font-bold text-white mb-2 sm:mb-3">Sube Tus Fotos 📸</h2>
-                <p className="text-white/60 text-sm sm:text-base leading-relaxed max-w-2xl mx-auto px-2">
-                  Comparte fotografías sin límites. Todas se almacenan de forma segura y pueden ser comentadas.
-                </p>
-                <div className="mt-3 sm:mt-4 inline-block text-xs text-white/40 bg-white/5 rounded-full px-3 sm:px-4 py-1 sm:py-2">
-                  ✨ JPG, PNG • Max 100MB
+          <div className="space-y-8 animate-slideIn">
+            <div className="bg-white/5 border border-white/10 rounded-lg p-6 sm:p-10 backdrop-blur-sm space-y-8">
+              <div className="text-center space-y-4">
+                <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white">Sube Tus Fotos 📸</h2>
+                <div className="space-y-3">
+                  <p className="text-white/70 text-sm sm:text-base leading-relaxed">
+                    Comparte fotografías sin límites. Todas se almacenan de forma segura y pueden ser comentadas.
+                  </p>
+                  <p className="text-white/60 text-xs sm:text-sm">
+                    ✨ Formato: JPG, PNG • Máximo 100MB por foto
+                  </p>
                 </div>
               </div>
-              <PhotoUpload
-                onSuccess={() => {
-                  setRefreshGallery((prev) => prev + 1);
-                  setTimeout(() => setActiveTab('galeria'), 1500);
-                }}
-              />
+              <div className="pt-4">
+                <PhotoUpload
+                  onSuccess={() => {
+                    setRefreshGallery((prev) => prev + 1);
+                    setTimeout(() => setActiveTab('galeria'), 1500);
+                  }}
+                />
+              </div>
             </div>
           </div>
         )}
 
         {activeTab === 'galeria' && (
-          <div className="space-y-4 sm:space-y-8 animate-slideIn">
-            <div className="bg-white/5 border border-white/10 rounded-lg p-4 sm:p-8 backdrop-blur-sm">
-              <h2 className="text-2xl sm:text-4xl font-bold text-white mb-1 sm:mb-2 text-center">Tu Galería Personal</h2>
-              <p className="text-white/50 text-center text-xs sm:text-sm mb-6 sm:mb-8 px-2">
-                Todas tus fotos subidas. Toca para agrandar y comentar.
-              </p>
-              <Gallery key={refreshGallery} />
+          <div className="space-y-8 animate-slideIn">
+            <div className="bg-white/5 border border-white/10 rounded-lg p-6 sm:p-10 backdrop-blur-sm space-y-8">
+              <div className="text-center space-y-4">
+                <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white">Tu Galería Personal</h2>
+                <p className="text-white/60 text-sm sm:text-base">
+                  Todas tus fotos subidas. Toca para agrandar y comentar.
+                </p>
+              </div>
+              <div className="pt-4">
+                <Gallery key={refreshGallery} />
+              </div>
             </div>
           </div>
         )}
@@ -147,7 +165,7 @@ export default function Home() {
       {/* Floating Admin Link */}
       <a
         href="/admin"
-        className="fixed bottom-20 sm:bottom-6 right-3 sm:right-6 w-14 sm:w-12 h-14 sm:h-12 rounded-full bg-gradient-to-br from-amber-500 to-yellow-600 hover:from-amber-600 hover:to-yellow-700 flex items-center justify-center shadow-lg hover:shadow-amber-500/50 transition-all duration-300 text-white/80 hover:text-white text-lg sm:text-base"
+        className="fixed bottom-20 sm:bottom-6 right-3 sm:right-6 w-14 sm:w-12 h-14 sm:h-12 rounded-full bg-gradient-to-br from-amber-500 to-yellow-600 hover:from-amber-600 hover:to-yellow-700 flex items-center justify-center shadow-lg hover:shadow-amber-500/50 transition-all duration-300 text-white/80 hover:text-white text-lg sm:text-base hover:scale-110"
         title="Ir a panel de administrador"
       >
         ⚙️

@@ -94,22 +94,22 @@ export function AccusationForm({ onSuccess }: AccusationFormProps) {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-4 w-full">
+    <form onSubmit={handleSubmit} className="space-y-8 w-full">
       <div className="relative">
         <Textarea
           placeholder='Ejemplo: "Acuso a Pueyo de comerse un arroz con pollo en la modrollo"'
           value={text}
           onChange={(e) => setText(e.target.value)}
-          className="min-h-[140px] sm:min-h-[160px] w-full bg-white/5 border border-white/10 text-white placeholder-white/30 text-sm sm:text-base rounded-lg backdrop-blur-sm focus:bg-white/10 focus:border-white/20 transition-all resize-none p-3 sm:p-4"
+          className="min-h-[160px] sm:min-h-[180px] w-full bg-white/5 border border-white/10 text-white placeholder-white/30 text-sm sm:text-base rounded-lg backdrop-blur-sm focus:bg-white/10 focus:border-white/30 transition-all resize-none p-4 sm:p-5 focus:ring-2 focus:ring-amber-500/30"
           disabled={loading}
         />
       </div>
 
-      <div className="flex gap-3">
+      <div className="flex gap-3 pt-4">
         <Button
           type="submit"
           disabled={loading || !text.trim()}
-          className="flex-1 bg-gradient-to-r from-amber-500 to-yellow-500 hover:from-amber-600 hover:to-yellow-600 text-black font-bold py-3 sm:py-4 text-sm sm:text-base rounded-lg shadow-lg hover:shadow-amber-500/50 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
+          className="flex-1 bg-gradient-to-r from-amber-500 via-amber-400 to-amber-500 hover:from-amber-600 hover:via-amber-500 hover:to-amber-600 text-black font-bold py-4 sm:py-5 text-base sm:text-lg rounded-xl shadow-lg shadow-amber-500/40 hover:shadow-amber-500/60 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed hover:scale-105 active:scale-95"
         >
           {loading ? '⏳ Enviando...' : '✉️ Enviar acusación'}
         </Button>

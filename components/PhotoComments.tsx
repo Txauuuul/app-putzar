@@ -120,40 +120,40 @@ export function PhotoComments({ photoId }: PhotoCommentsProps) {
   };
 
   return (
-    <div className="space-y-4 w-full">
+    <div className="space-y-5 w-full">
       {/* Add Comment Form */}
-      <form onSubmit={handleAddComment} className="space-y-2">
+      <form onSubmit={handleAddComment} className="space-y-3">
         <input
           type="text"
-          placeholder="Agregar comentario..."
+          placeholder="Agregar un comentario..."
           value={newComment}
           onChange={(e) => setNewComment(e.target.value)}
           disabled={loading}
-          className="w-full bg-white/5 border border-white/10 rounded-lg px-3 py-2 text-xs sm:text-sm text-white placeholder-white/40 focus:bg-white/10 focus:border-white/20 focus:outline-none transition-all"
+          className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-sm text-white placeholder-white/40 focus:bg-white/10 focus:border-white/30 focus:ring-2 focus:ring-purple-500/30 focus:outline-none transition-all"
         />
         <Button
           type="submit"
           disabled={loading || !newComment.trim()}
-          className="w-full bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white text-xs sm:text-sm font-medium py-2 rounded-lg disabled:opacity-50"
+          className="w-full bg-gradient-to-r from-purple-500 via-purple-400 to-purple-500 hover:from-purple-600 hover:via-purple-500 hover:to-purple-600 text-white font-bold py-3 text-base rounded-lg shadow-lg shadow-purple-500/30 hover:shadow-purple-500/40 transition-all duration-300 disabled:opacity-50 hover:scale-105 active:scale-95"
         >
-          {loading ? 'Publicando...' : '💬 Comentar'}
+          {loading ? '⏳ Publicando...' : '💬 Comentar'}
         </Button>
       </form>
 
       {/* Comments List */}
-      <div className="space-y-2 max-h-64 overflow-y-auto">
+      <div className="space-y-3 max-h-72 overflow-y-auto">
         {loadingComments ? (
-          <p className="text-xs text-white/60 text-center">Cargando comentarios...</p>
+          <p className="text-sm text-white/60 text-center py-6">Cargando comentarios...</p>
         ) : comments.length === 0 ? (
-          <p className="text-xs text-white/60 text-center">Sin comentarios aún</p>
+          <p className="text-sm text-white/60 text-center py-6">Sin comentarios aún</p>
         ) : (
           comments.map((comment) => (
             <div
               key={comment.id}
-              className="bg-white/5 border border-white/10 rounded-lg p-2 sm:p-3 space-y-2"
+              className="bg-white/5 border border-white/10 rounded-lg p-4 space-y-2 hover:bg-white/10 transition-colors"
             >
               <div className="flex justify-between items-start gap-2">
-                <p className="text-xs text-white/40">
+                <p className="text-xs text-white/50">
                   {new Date(comment.created_at).toLocaleDateString('es-ES', {
                     month: 'short',
                     day: 'numeric',
@@ -163,12 +163,12 @@ export function PhotoComments({ photoId }: PhotoCommentsProps) {
                 </p>
                 <button
                   onClick={() => handleDeleteComment(comment.id)}
-                  className="text-xs text-red-400 hover:text-red-300 transition-colors"
+                  className="text-xs text-red-400 hover:text-red-300 transition-colors hover:scale-125"
                 >
                   🗑️
                 </button>
               </div>
-              <p className="text-xs sm:text-sm text-white/80 break-words">{comment.comment}</p>
+              <p className="text-sm text-white/80 break-words">{comment.comment}</p>
             </div>
           ))
         )}

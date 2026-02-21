@@ -164,18 +164,18 @@ export function PhotoUpload({ onSuccess }: PhotoUploadProps) {
   };
 
   return (
-    <div className="space-y-6 w-full">
+    <div className="space-y-8 w-full">
       {/* Botones principales */}
-      <div className="flex gap-2 sm:gap-3 flex-wrap">
+      <div className="flex flex-col sm:flex-row gap-4 sm:gap-4">
         <Button
           onClick={() => {
             console.log('👆 Botón "Seleccionar Fotos" clickeado');
             fileInputRef.current?.click();
           }}
           disabled={uploading}
-          className="flex-1 min-w-[120px] sm:min-w-[150px] bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white font-bold py-3 sm:py-4 text-sm sm:text-base rounded-lg shadow-lg hover:shadow-purple-500/50 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
+          className="flex-1 bg-gradient-to-r from-purple-500 via-purple-400 to-purple-500 hover:from-purple-600 hover:via-purple-500 hover:to-purple-600 text-white font-bold py-4 sm:py-5 text-base sm:text-lg rounded-xl shadow-lg shadow-purple-500/40 hover:shadow-purple-500/60 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed hover:scale-105 active:scale-95"
         >
-          {uploading ? '⏳ Subiendo...' : '🖼️ Fotos'}
+          {uploading ? '⏳ Subiendo...' : '🖼️ Seleccionar Fotos'}
         </Button>
         <Button
           onClick={() => {
@@ -183,9 +183,9 @@ export function PhotoUpload({ onSuccess }: PhotoUploadProps) {
             cameraInputRef.current?.click();
           }}
           disabled={uploading}
-          className="flex-1 min-w-[120px] sm:min-w-[150px] bg-gradient-to-r from-cyan-500 to-blue-500 hover:from-cyan-600 hover:to-blue-600 text-white font-bold py-3 sm:py-4 text-sm sm:text-base rounded-lg shadow-lg hover:shadow-cyan-500/50 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
+          className="flex-1 bg-gradient-to-r from-cyan-500 via-cyan-400 to-cyan-500 hover:from-cyan-600 hover:via-cyan-500 hover:to-cyan-600 text-white font-bold py-4 sm:py-5 text-base sm:text-lg rounded-xl shadow-lg shadow-cyan-500/40 hover:shadow-cyan-500/60 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed hover:scale-105 active:scale-95"
         >
-          {uploading ? '⏳ Subiendo...' : '📷 Cámara'}
+          {uploading ? '⏳ Subiendo...' : '📷 Tomar Foto'}
         </Button>
       </div>
 
@@ -215,18 +215,18 @@ export function PhotoUpload({ onSuccess }: PhotoUploadProps) {
 
       {/* Barra de progreso */}
       {uploading && (
-        <div className="space-y-3 bg-white/5 border border-white/10 rounded-lg p-4">
-          <div className="w-full bg-white/10 rounded-full h-3 overflow-hidden">
+        <div className="space-y-4 bg-white/5 border border-white/10 rounded-lg p-5">
+          <div className="w-full bg-white/10 rounded-full h-4 overflow-hidden">
             <div
-              className="bg-gradient-to-r from-purple-500 via-pink-500 to-purple-500 h-full transition-all duration-300 animate-pulse"
+              className="bg-gradient-to-r from-purple-500 via-pink-500 to-purple-500 h-full transition-all duration-300 animate-pulse rounded-full"
               style={{ width: `${uploadProgress}%` }}
             />
           </div>
           <div className="flex justify-between items-center">
-            <p className="text-xs sm:text-sm text-white/70 font-medium">
+            <p className="text-sm text-white/70 font-medium">
               ⏳ Subiendo fotos...
             </p>
-            <p className="text-xs sm:text-sm font-bold text-purple-400">
+            <p className="text-sm font-bold text-purple-300">
               {uploadProgress}%
             </p>
           </div>
@@ -234,9 +234,13 @@ export function PhotoUpload({ onSuccess }: PhotoUploadProps) {
       )}
 
       {/* Mensaje de instrucción */}
-      <div className="text-center text-white/50 text-xs sm:text-sm">
-        <p>💡 Múltiples fotos a la vez</p>
-        <p className="text-xs mt-1">Max 100MB • JPG, PNG</p>
+      <div className="text-center space-y-2 pt-4">
+        <p className="text-white/60 text-sm font-medium">
+          💡 Puedes subir múltiples fotos a la vez
+        </p>
+        <p className="text-white/50 text-xs">
+          Máximo 100MB por foto • JPG, PNG
+        </p>
       </div>
     </div>
   );

@@ -86,25 +86,25 @@ export function Gallery({ isAdmin = false, adminPin }: GalleryProps) {
   };
 
   if (loading) {
-    return <div className="text-center py-8 text-white/60">Cargando fotos...</div>;
+    return <div className="text-center py-12 text-white/60">Cargando fotos...</div>;
   }
 
   if (photos.length === 0) {
     return (
-      <div className="text-center py-12 text-white/60">
-        <p className="mb-2">📸 Aún no hay fotos</p>
+      <div className="text-center py-16 space-y-3 text-white/60">
+        <p className="text-lg">📸 Aún no hay fotos</p>
         <p className="text-sm">Sube fotos para que aparezcan aquí</p>
       </div>
     );
   }
 
   return (
-    <div className="space-y-4">
-      <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-2 sm:gap-3">
+    <div className="space-y-6">
+      <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-4">
         {photos.map((photo) => (
           <div
             key={photo.id}
-            className="relative group cursor-pointer aspect-square overflow-hidden rounded-lg bg-white/5 border border-white/10 hover:border-white/30 transition-all duration-300"
+            className="relative group cursor-pointer aspect-square overflow-hidden rounded-lg bg-white/5 border border-white/10 hover:border-white/30 transition-all duration-300 hover:shadow-lg hover:shadow-white/10"
             onClick={() => {
               setSelectedPhoto(photo.photo_url);
               setSelectedPhotoId(photo.id);
@@ -116,13 +116,13 @@ export function Gallery({ isAdmin = false, adminPin }: GalleryProps) {
               className="w-full h-full object-cover hover:scale-110 transition-transform duration-300"
             />
 
-            <div className="absolute inset-0 bg-black/0 group-hover:bg-black/50 transition-all duration-300 flex items-center justify-center opacity-0 group-hover:opacity-100">
+            <div className="absolute inset-0 bg-black/0 group-hover:bg-black/60 transition-all duration-300 flex items-center justify-center opacity-0 group-hover:opacity-100">
               <Button
                 onClick={(e) => {
                   e.stopPropagation();
                   handleDeletePhoto(photo.id);
                 }}
-                className="bg-red-500/80 hover:bg-red-600 text-white text-xs"
+                className="bg-red-500/80 hover:bg-red-600 text-white text-xs font-bold px-3 py-2 rounded-lg"
               >
                 🗑️ Eliminar
               </Button>
@@ -137,20 +137,20 @@ export function Gallery({ isAdmin = false, adminPin }: GalleryProps) {
 
       {selectedPhoto && (
         <div
-          className="fixed inset-0 bg-black/80 backdrop-blur z-50 flex items-center justify-center p-3 sm:p-4 cursor-pointer overflow-y-auto"
+          className="fixed inset-0 bg-black/80 backdrop-blur z-50 flex items-center justify-center p-4 cursor-pointer overflow-y-auto"
           onClick={() => {
             setSelectedPhoto(null);
             setSelectedPhotoId(null);
           }}
         >
           <div
-            className="bg-black/50 rounded-lg border border-white/10 backdrop-blur-sm p-4 sm:p-6 max-w-2xl w-full max-h-[90vh] overflow-y-auto cursor-default my-auto"
+            className="bg-black/50 rounded-xl border border-white/10 backdrop-blur-sm p-6 sm:p-8 max-w-2xl w-full max-h-[90vh] overflow-y-auto cursor-default my-auto space-y-6"
             onClick={(e) => e.stopPropagation()}
           >
             <img
               src={selectedPhoto}
               alt="Full size"
-              className="w-full rounded-lg mb-4"
+              className="w-full rounded-lg"
             />
             {selectedPhotoId && <PhotoComments photoId={selectedPhotoId} />}
             <button
@@ -158,7 +158,7 @@ export function Gallery({ isAdmin = false, adminPin }: GalleryProps) {
                 setSelectedPhoto(null);
                 setSelectedPhotoId(null);
               }}
-              className="mt-4 w-full bg-white/10 hover:bg-white/20 text-white text-sm py-2 rounded-lg transition-colors"
+              className="w-full bg-white/10 hover:bg-white/20 text-white text-base font-bold py-3 rounded-lg transition-all duration-300 hover:scale-105"
             >
               Cerrar
             </button>
