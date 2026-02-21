@@ -100,7 +100,7 @@ export function Gallery({ isAdmin = false, adminPin }: GalleryProps) {
 
   return (
     <div className="space-y-4">
-      <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3">
+      <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-2 sm:gap-3">
         {photos.map((photo) => (
           <div
             key={photo.id}
@@ -137,14 +137,14 @@ export function Gallery({ isAdmin = false, adminPin }: GalleryProps) {
 
       {selectedPhoto && (
         <div
-          className="fixed inset-0 bg-black/80 backdrop-blur z-50 flex items-center justify-center p-4 cursor-pointer"
+          className="fixed inset-0 bg-black/80 backdrop-blur z-50 flex items-center justify-center p-3 sm:p-4 cursor-pointer overflow-y-auto"
           onClick={() => {
             setSelectedPhoto(null);
             setSelectedPhotoId(null);
           }}
         >
           <div
-            className="bg-black/50 rounded-lg border border-white/10 backdrop-blur-sm p-6 max-w-2xl w-full max-h-[90vh] overflow-y-auto cursor-default"
+            className="bg-black/50 rounded-lg border border-white/10 backdrop-blur-sm p-4 sm:p-6 max-w-2xl w-full max-h-[90vh] overflow-y-auto cursor-default my-auto"
             onClick={(e) => e.stopPropagation()}
           >
             <img

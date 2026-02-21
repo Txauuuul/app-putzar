@@ -166,16 +166,16 @@ export function PhotoUpload({ onSuccess }: PhotoUploadProps) {
   return (
     <div className="space-y-6 w-full">
       {/* Botones principales */}
-      <div className="flex gap-3 flex-wrap">
+      <div className="flex gap-2 sm:gap-3 flex-wrap">
         <Button
           onClick={() => {
             console.log('👆 Botón "Seleccionar Fotos" clickeado');
             fileInputRef.current?.click();
           }}
           disabled={uploading}
-          className="flex-1 min-w-[150px] bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white font-bold py-3 rounded-lg shadow-lg hover:shadow-purple-500/50 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
+          className="flex-1 min-w-[120px] sm:min-w-[150px] bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white font-bold py-3 sm:py-4 text-sm sm:text-base rounded-lg shadow-lg hover:shadow-purple-500/50 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
         >
-          {uploading ? '⏳ Subiendo...' : '🖼️ Seleccionar Fotos'}
+          {uploading ? '⏳ Subiendo...' : '🖼️ Fotos'}
         </Button>
         <Button
           onClick={() => {
@@ -183,9 +183,9 @@ export function PhotoUpload({ onSuccess }: PhotoUploadProps) {
             cameraInputRef.current?.click();
           }}
           disabled={uploading}
-          className="flex-1 min-w-[150px] bg-gradient-to-r from-cyan-500 to-blue-500 hover:from-cyan-600 hover:to-blue-600 text-white font-bold py-3 rounded-lg shadow-lg hover:shadow-cyan-500/50 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
+          className="flex-1 min-w-[120px] sm:min-w-[150px] bg-gradient-to-r from-cyan-500 to-blue-500 hover:from-cyan-600 hover:to-blue-600 text-white font-bold py-3 sm:py-4 text-sm sm:text-base rounded-lg shadow-lg hover:shadow-cyan-500/50 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
         >
-          {uploading ? '⏳ Subiendo...' : '📷 Tomar Foto'}
+          {uploading ? '⏳ Subiendo...' : '📷 Cámara'}
         </Button>
       </div>
 
@@ -223,10 +223,10 @@ export function PhotoUpload({ onSuccess }: PhotoUploadProps) {
             />
           </div>
           <div className="flex justify-between items-center">
-            <p className="text-sm text-white/70 font-medium">
+            <p className="text-xs sm:text-sm text-white/70 font-medium">
               ⏳ Subiendo fotos...
             </p>
-            <p className="text-sm font-bold text-purple-400">
+            <p className="text-xs sm:text-sm font-bold text-purple-400">
               {uploadProgress}%
             </p>
           </div>
@@ -234,9 +234,9 @@ export function PhotoUpload({ onSuccess }: PhotoUploadProps) {
       )}
 
       {/* Mensaje de instrucción */}
-      <div className="text-center text-white/50 text-sm">
-        <p>💡 Puedes subir múltiples fotos a la vez</p>
-        <p className="text-xs mt-1">Máximo 100MB por foto</p>
+      <div className="text-center text-white/50 text-xs sm:text-sm">
+        <p>💡 Múltiples fotos a la vez</p>
+        <p className="text-xs mt-1">Max 100MB • JPG, PNG</p>
       </div>
     </div>
   );
