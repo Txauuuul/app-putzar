@@ -1,0 +1,76 @@
+# 🚀 GUÍA RÁPIDA - LA GALA
+
+## 📍 Ubicación
+```
+c:\XAMP\htdocs\app-putzar\
+```
+
+## ⚡ 3 PASOS PARA COMENZAR
+
+### 1️⃣ Supabase (5 min)
+```
+1. supabase.com → Sign Up → Nuevo Proyecto
+2. SQL Editor → Copiar/pegar SQL de SETUP.md
+3. Storage → Crear bucket "photos" → Make public
+4. Settings → API → Copiar URL y Anon Key
+```
+
+### 2️⃣ Variables de Entorno (1 min)
+**Edita `c:\XAMP\htdocs\app-putzar\.env.local`:**
+```env
+NEXT_PUBLIC_SUPABASE_URL=https://xxxx.supabase.co
+NEXT_PUBLIC_SUPABASE_ANON_KEY=xxxx
+NEXT_PUBLIC_ADMIN_PIN=GalaFormal2026
+NEXT_PUBLIC_NOTIFICATIONS_ENABLED=true
+```
+
+### 3️⃣ Ejecuta (1 min)
+```bash
+cd c:\XAMP\htdocs\app-putzar
+npm run dev
+
+# Abre: http://localhost:3000
+```
+
+## 🔒 Admin
+- **URL**: `/admin`
+- **PIN**: El que configuraste en `.env.local`
+
+## 📱 URLs Usuarios
+- **Principal**: `/` (envía acusaciones, fotos, galería)
+- **De Éxito**: `/success` (después de enviar)
+
+## 🎨 Vista Responsiva
+- ✅ Móvil: Home compacto, admin vertical
+- ✅ Desktop: Home con sidebar, admin con stats
+
+## 📊 Base de Datos
+- **Tabla**: `accusations` (acusaciones)
+- **Tabla**: `photos` (fotos)
+- **Tabla**: `settings` (notificaciones toggle)
+
+## 🔄 Flujo Datos
+1. Usuario anónimo accede a `/`
+2. Supabase asigna `user_id` único
+3. Usuario envía acusación → guardar en BD
+4. Admin va `/admin` → ingresa PIN → ve todo
+
+## 🌐 Cuando Esté Listo
+```bash
+# Deploy a Vercel
+git init
+git add .
+git commit -m "La Gala App"
+git remote add origin https://github.com/USUARIO/repo.git
+git push -u origin main
+
+# Vercel importa auto → URL pública
+```
+
+## 📝 Documentos
+- `SETUP.md` - Setup detallado
+- `README.md` - Documentación completa
+- `COMENZAR.md` - Checklist final
+
+## ✨ ¡YA ESTÁ!
+Todo listo. Solo configura Supabase y disfruta la gala.

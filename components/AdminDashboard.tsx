@@ -1,0 +1,199 @@
+'use client';
+
+import { useState, useEffect } from 'react';
+import { Accusation, Photo } from '@/lib/schema';
+import { Button } from '@/components/ui/button';
+import { useToast } from '@/hooks/use-toast';
+import { AdminTable } from '@/components/AdminTable';
+import { AdminGallery } from '@/components/AdminGallery';
+
+interface AdminDashboardProps {
+  adminPin: string;
+}
+
+export function AdminDashboard({ adminPin }: AdminDashboardProps) {
+  const [accusations, setAccusations] = useState<Accusation[]>([]);
+  const [photos, setPhotos] = useState<Photo[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [notificationsEnabled, setNotificationsEnabled] = useState(true);
+  const [activeTab, setActiveTab] = useState<'accusations' | 'photos'>('accusations');
+  const { toast } = useToast();
+
+  useEffect(() => {
+    fetchData();
+  }, []);
+
+  const fetchData = async () => {
+    try {
+      setLoading(true);
+      const headers = { 'x-admin-pin': adminPin };
+
+      // Fetch accusations
+      const accusationsRes = await fetch('/api/admin/acusaciones', { headers });
+      const accusationsData = await accusationsRes.json();
+      setAccusations(accusationsData);
+
+      // Fetch photos
+      const photosRes = await fetch('/api/admin/fotos', { headers });
+      const photosData = await photosRes.json();
+      setPhotos(photosData);
+
+      // Fetch settings
+      const settingsRes = await fetch('/api/admin/settings', { headers });
+      const settingsData = await settingsRes.json();
+      setNotificationsEnabled(settingsData.notifications_enabled);
+    } catch (error) {
+      console.error('Error fetching admin data:', error);
+      toast({
+        title: 'Error',
+        description: 'No pudimos cargar los datos',
+        variant: 'destructive',
+      });
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleToggleNotifications = async () => {
+    try {
+      const headers = { 'x-admin-pin': adminPin, 'Content-Type': 'application/json' };
+      const response = await fetch('/api/admin/settings', {
+        method: 'PUT',
+        headers,
+        body: JSON.stringify({ notifications_enabled: !notificationsEnabled }),
+      });
+
+      if (!response.ok) throw new Error('Failed to update settings');
+
+      setNotificationsEnabled(!notificationsEnabled);
+      toast({
+        title: '✨ Ajustes actualizados',
+        description: `Notificaciones ${!notificationsEnabled ? 'activadas' : 'desactivadas'}`,
+      });
+    } catch (error) {
+      console.error('Error updating settings:', error);
+      toast({
+        title: 'Error',
+        description: 'No pudimos actualizar los ajustes',
+        variant: 'destructive',
+      });
+    }
+  };
+
+  const handleDeleteAccusation = async (accusationId: string) => {
+    if (!confirm('¿Estás seguro de que deseas eliminar esta acusación?')) return;
+
+    try {
+      const response = await fetch(`/api/acusaciones/${accusationId}`, {
+        method: 'DELETE',
+        headers: { 'x-admin-pin': adminPin },
+      });
+
+      if (!response.ok) throw new Error('Failed to delete accusation');
+
+      setAccusations((prev) => prev.filter((a) => a.id !== accusationId));
+      toast({
+        title: '✨ Acusación eliminada',
+        description: 'La acusación ha sido eliminada exitosamente',
+      });
+    } catch (error) {
+      console.error('Error deleting accusation:', error);
+      toast({
+        title: 'Error',
+        description: 'No pudimos eliminar la acusación',
+        variant: 'destructive',
+      });
+    }
+  };
+
+  if (loading) {
+    return (
+      <div className="flex items-center justify-center min-h-screen">
+        <div className="text-white/60">Cargando panel de administrador...</div>
+      </div>
+    );
+  }
+
+  return (
+    <div className="space-y-8">
+      {/* Header */}
+      <div className="border-b border-white/10 pb-6">
+        <h1 className="text-4xl font-bold bg-gradient-to-r from-amber-400 to-yellow-400 bg-clip-text text-transparent mb-2">
+          Panel de Administrador
+        </h1>
+        <p className="text-white/60">Gestiona acusaciones y fotos de la gala</p>
+      </div>
+
+      {/* Stats */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        <div className="bg-white/5 border border-white/10 rounded-lg p-6 backdrop-blur-sm hover:bg-white/10 transition-all duration-300">
+          <div className="text-white/60 text-sm font-medium">Total Acusaciones</div>
+          <div className="text-4xl font-bold text-amber-400 mt-2">{accusations.length}</div>
+        </div>
+
+        <div className="bg-white/5 border border-white/10 rounded-lg p-6 backdrop-blur-sm hover:bg-white/10 transition-all duration-300">
+          <div className="text-white/60 text-sm font-medium">Total Fotos</div>
+          <div className="text-4xl font-bold text-purple-400 mt-2">{photos.length}</div>
+        </div>
+
+        <div className="bg-white/5 border border-white/10 rounded-lg p-6 backdrop-blur-sm hover:bg-white/10 transition-all duration-300">
+          <div className="text-white/60 text-sm font-medium">Usuarios Únicos</div>
+          <div className="text-4xl font-bold text-cyan-400 mt-2">
+            {new Set(accusations.map((a) => a.user_id)).size}
+          </div>
+        </div>
+
+        <div className="bg-white/5 border border-white/10 rounded-lg p-6 backdrop-blur-sm hover:bg-white/10 transition-all duration-300">
+          <div className="text-white/60 text-sm font-medium">Notificaciones</div>
+          <Button
+            onClick={handleToggleNotifications}
+            className={`mt-2 w-full ${
+              notificationsEnabled
+                ? 'bg-green-500/20 text-green-400 hover:bg-green-500/30'
+                : 'bg-red-500/20 text-red-400 hover:bg-red-500/30'
+            }`}
+          >
+            {notificationsEnabled ? '✓ Activadas' : '✗ Desactivadas'}
+          </Button>
+        </div>
+      </div>
+
+      {/* Tabs */}
+      <div className="flex gap-4 border-b border-white/10">
+        <button
+          onClick={() => setActiveTab('accusations')}
+          className={`px-6 py-3 font-medium border-b-2 transition-all duration-300 ${
+            activeTab === 'accusations'
+              ? 'border-amber-400 text-amber-400'
+              : 'border-transparent text-white/60 hover:text-white'
+          }`}
+        >
+          📋 Acusaciones ({accusations.length})
+        </button>
+        <button
+          onClick={() => setActiveTab('photos')}
+          className={`px-6 py-3 font-medium border-b-2 transition-all duration-300 ${
+            activeTab === 'photos'
+              ? 'border-amber-400 text-amber-400'
+              : 'border-transparent text-white/60 hover:text-white'
+          }`}
+        >
+          🖼️ Fotos ({photos.length})
+        </button>
+      </div>
+
+      {/* Content */}
+      {activeTab === 'accusations' && (
+        <AdminTable
+          accusations={accusations}
+          onDelete={handleDeleteAccusation}
+          adminPin={adminPin}
+        />
+      )}
+
+      {activeTab === 'photos' && (
+        <AdminGallery photos={photos} adminPin={adminPin} />
+      )}
+    </div>
+  );
+}
