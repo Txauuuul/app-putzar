@@ -56,7 +56,7 @@ export default function RootLayout({
         </div>
 
         {/* Content */}
-        <div className="relative z-10">
+        <div className="relative z-10 flex-1 flex flex-col w-full">
           {children}
         </div>
       </body>

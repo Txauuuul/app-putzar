@@ -31,14 +31,14 @@ export default function Home() {
   }
 
   return (
-    <main className="min-h-screen pb-24 sm:pb-20 bg-black">
-      {/* Header */}
-      <div className="border-b border-white/10 py-16 sm:py-24 lg:py-32 px-3 sm:px-6 lg:px-8 backdrop-blur-sm">
-        <div className="mx-auto max-w-4xl text-center space-y-12 sm:space-y-16">
-          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold font-playfair bg-gradient-to-r from-amber-400 via-yellow-300 to-amber-300 bg-clip-text text-transparent pt-4">
+    <main className="flex flex-col w-full min-h-screen pb-24 sm:pb-20 bg-black">
+      {/* Header - ENORME espaciado */}
+      <div className="border-b border-white/10 py-20 sm:py-32 lg:py-40 px-3 sm:px-6 lg:px-8 backdrop-blur-sm flex-shrink-0">
+        <div className="mx-auto max-w-4xl text-center space-y-16 sm:space-y-20">
+          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold font-playfair bg-gradient-to-r from-amber-400 via-yellow-300 to-amber-300 bg-clip-text text-transparent pt-6">
              Putero & Zarigüeya 
           </h1>
-          <div className="space-y-6 sm:space-y-8">
+          <div className="space-y-8 sm:space-y-10">
             <p className="text-white/60 text-sm sm:text-base lg:text-base leading-relaxed px-2">
               En esta plataforma podréis hacer acusaciones a lo largo del año de manera anónima y aportar fotografías + acusaciones para una mayor veracidad.
             </p>
@@ -56,10 +56,10 @@ export default function Home() {
         </div>
       </div>
 
-      {/* Main Content */}
-      <div className="mx-auto max-w-4xl px-3 sm:px-6 lg:px-8 py-16 sm:py-24 space-y-16 sm:space-y-24">
+      {/* Main Content - ESPACIADO EXAGERADO POR TESTING */}
+      <div className="flex-1 flex flex-col mx-auto w-full max-w-4xl px-3 sm:px-6 lg:px-8 py-24 sm:py-32 space-y-24 sm:space-y-32">
         {/* Tabs */}
-        <div className="space-y-6 sm:space-y-8">
+        <div className="space-y-8 sm:space-y-10">
           <div className="flex flex-col sm:flex-row gap-4 sm:gap-5">
             <button
               onClick={() => setActiveTab('acusacion')}
@@ -94,13 +94,13 @@ export default function Home() {
           </div>
         </div>
 
-        {/* Tab Content */}
+        {/* Tab Content - CON ENORME ESPACIADO */}
         {activeTab === 'acusacion' && (
-          <div className="space-y-12 sm:space-y-14 animate-slideIn">
-            <div className="bg-white/5 border border-white/10 rounded-lg p-8 sm:p-12 backdrop-blur-sm space-y-12">
-              <div className="text-center space-y-8 sm:space-y-10">
+          <div className="space-y-16 sm:space-y-20 animate-slideIn">
+            <div className="bg-white/5 border border-white/10 rounded-lg p-8 sm:p-12 backdrop-blur-sm space-y-16">
+              <div className="text-center space-y-12 sm:space-y-14">
                 <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white">Envía Una Acusación</h2>
-                <div className="space-y-5 sm:space-y-6">
+                <div className="space-y-6 sm:space-y-8">
                   <p className="text-white/60 text-sm sm:text-base leading-relaxed">
                     Escribe libremente tu acusación. Formato sugerido: "Acuso a [nombre] por [motivo]"
                   </p>
@@ -109,7 +109,7 @@ export default function Home() {
                   </p>
                 </div>
               </div>
-              <div className="pt-8 sm:pt-10">
+              <div className="pt-12 sm:pt-16">
                 <AccusationForm
                   onSuccess={() => {
                     setRefreshGallery((prev) => prev + 1);
@@ -122,11 +122,11 @@ export default function Home() {
         )}
 
         {activeTab === 'fotos' && (
-          <div className="space-y-12 sm:space-y-14 animate-slideIn">
-            <div className="bg-white/5 border border-white/10 rounded-lg p-8 sm:p-12 backdrop-blur-sm space-y-12">
-              <div className="text-center space-y-8 sm:space-y-10">
+          <div className="space-y-16 sm:space-y-20 animate-slideIn">
+            <div className="bg-white/5 border border-white/10 rounded-lg p-8 sm:p-12 backdrop-blur-sm space-y-16">
+              <div className="text-center space-y-12 sm:space-y-14">
                 <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white">Sube Tus Fotos 📸</h2>
-                <div className="space-y-5 sm:space-y-6">
+                <div className="space-y-6 sm:space-y-8">
                   <p className="text-white/60 text-sm sm:text-base leading-relaxed">
                     Comparte fotografías sin límites. Todas se almacenan de forma segura y pueden ser comentadas.
                   </p>
@@ -135,7 +135,7 @@ export default function Home() {
                   </p>
                 </div>
               </div>
-              <div className="pt-8 sm:pt-10">
+              <div className="pt-12 sm:pt-16">
                 <PhotoUpload
                   onSuccess={() => {
                     setRefreshGallery((prev) => prev + 1);
@@ -148,15 +148,15 @@ export default function Home() {
         )}
 
         {activeTab === 'galeria' && (
-          <div className="space-y-12 sm:space-y-14 animate-slideIn">
-            <div className="bg-white/5 border border-white/10 rounded-lg p-8 sm:p-12 backdrop-blur-sm space-y-12">
-              <div className="text-center space-y-6 sm:space-y-8">
+          <div className="space-y-16 sm:space-y-20 animate-slideIn">
+            <div className="bg-white/5 border border-white/10 rounded-lg p-8 sm:p-12 backdrop-blur-sm space-y-16">
+              <div className="text-center space-y-8 sm:space-y-10">
                 <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white">Tu Galería Personal</h2>
                 <p className="text-white/60 text-sm sm:text-base">
                   Todas tus fotos subidas. Toca para agrandar y comentar.
                 </p>
               </div>
-              <div className="pt-8 sm:pt-10">
+              <div className="pt-12 sm:pt-16">
                 <Gallery key={refreshGallery} />
               </div>
             </div>
