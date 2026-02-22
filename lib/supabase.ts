@@ -8,6 +8,11 @@ if (!supabaseUrl || !supabaseAnonKey) {
   throw new Error('Missing Supabase environment variables');
 }
 
+console.log('🔍 [SUPABASE INIT]');
+console.log('  ✅ NEXT_PUBLIC_SUPABASE_URL:', supabaseUrl);
+console.log('  ✅ NEXT_PUBLIC_SUPABASE_ANON_KEY: [configured]');
+console.log('  ' + (supabaseServiceRoleKey ? '✅ SUPABASE_SERVICE_ROLE_KEY: [configured]' : '⚠️ SUPABASE_SERVICE_ROLE_KEY: [NOT configured - panel read may fail]'));
+
 export const supabase = createClient(supabaseUrl, supabaseAnonKey);
 
 // Admin client: uses service role key to bypass RLS
@@ -22,7 +27,7 @@ export const getSupabaseClient = () => {
 // Get admin client (for server-side operations only)
 export const getSupabaseAdminClient = () => {
   if (!supabaseAdmin) {
-    throw new Error('SUPABASE_SERVICE_ROLE_KEY not configured');
+    throw new Error('SUPABASE_SERVICE_ROLE_KEY not configured - Run SQL_ADMIN_SETUP.sql in Supabase dashboard');
   }
   return supabaseAdmin;
 };

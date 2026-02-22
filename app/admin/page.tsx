@@ -37,7 +37,7 @@ export default function AdminPage() {
 
     if (setAdminSession(pin)) {
       setIsAuthenticated(true);
-      setPin('');
+      // ✅ NO limpiar el PIN - lo necesita AdminDashboard para las llamadas API
     } else {
       setError('PIN incorrecto');
       setTimeout(() => setError(''), 3000);

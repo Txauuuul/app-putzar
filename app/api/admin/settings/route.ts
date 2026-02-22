@@ -7,40 +7,47 @@ export const runtime = 'nodejs';
 // GET - Fetch settings
 export async function GET(req: NextRequest) {
   try {
+    console.log('\n🔍 [GET /api/admin/settings] Starting...');
+    
     const adminPin = req.headers.get('x-admin-pin');
+    console.log('🔑 [GET /api/admin/settings] Admin PIN received');
 
     if (!adminPin || !verifyAdminPin(adminPin)) {
+      console.log('❌ [GET /api/admin/settings] PIN verification failed');
       return NextResponse.json({ error: 'Unauthorized' }, { status: 403 });
     }
 
+    console.log('✅ [GET /api/admin/settings] PIN verified');
+
+    // Get all settings (don't use .single() because table might be empty)
     const { data, error } = await supabase
       .from('settings')
-      .select('*')
-      .single();
-
-    if (error && error.code === 'PGRST116') {
-      // No settings exist, create default
-      const { data: newSettings, error: insertError } = await supabase
-        .from('settings')
-        .insert({ notifications_enabled: true })
-        .select()
-        .single();
-
-      if (insertError) {
-        throw insertError;
-      }
-
-      return NextResponse.json(newSettings);
-    }
+      .select('*');
 
     if (error) {
-      throw error;
+      console.warn('⚠️ [GET /api/admin/settings] Query error, returning defaults:', error.message);
+      // Table might not exist yet, return defaults
+      return NextResponse.json({
+        notifications_enabled: true,
+      });
     }
 
-    return NextResponse.json(data);
+    // If no settings exist, return defaults
+    if (!data || data.length === 0) {
+      console.log('ℹ️ [GET /api/admin/settings] No settings found, returning defaults');
+      return NextResponse.json({
+        notifications_enabled: true,
+      });
+    }
+
+    console.log('✅ [GET /api/admin/settings] Success, returning settings');
+    return NextResponse.json(data[0]);
   } catch (error) {
-    console.error('Error fetching settings:', error);
-    return NextResponse.json({ error: 'Failed to fetch settings' }, { status: 500 });
+    console.error('❌ [GET /api/admin/settings] Unexpected error:', error);
+    // Return defaults even on error
+    return NextResponse.json({
+      notifications_enabled: true,
+    });
   }
 }
 

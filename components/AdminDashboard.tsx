@@ -26,14 +26,17 @@ export function AdminDashboard({ adminPin }: AdminDashboardProps) {
   const fetchData = async () => {
     try {
       setLoading(true);
+      console.log('🔐 [AdminDashboard] adminPin prop value:', adminPin ? `${adminPin.substring(0, 5)}...` : 'UNDEFINED/EMPTY');
       const headers = { 'x-admin-pin': adminPin };
 
       // Fetch accusations
+      console.log('📡 [AdminDashboard] Sending headers:', { 'x-admin-pin': adminPin ? `${adminPin.substring(0, 5)}...` : 'EMPTY' });
       const accusationsRes = await fetch('/api/admin/acusaciones', { headers });
       if (!accusationsRes.ok) {
         throw new Error(`Failed to fetch accusations: ${accusationsRes.statusText}`);
       }
       const accusationsData = await accusationsRes.json();
+      console.log('✅ [AdminDashboard] Accusations fetched:', Array.isArray(accusationsData) ? `${accusationsData.length} records` : 'error');
       setAccusations(Array.isArray(accusationsData) ? accusationsData : []);
 
       // Fetch photos
@@ -42,17 +45,26 @@ export function AdminDashboard({ adminPin }: AdminDashboardProps) {
         throw new Error(`Failed to fetch photos: ${photosRes.statusText}`);
       }
       const photosData = await photosRes.json();
+      console.log('✅ [AdminDashboard] Photos fetched:', Array.isArray(photosData) ? `${photosData.length} records` : 'error');
       setPhotos(Array.isArray(photosData) ? photosData : []);
 
-      // Fetch settings
-      const settingsRes = await fetch('/api/admin/settings', { headers });
-      if (!settingsRes.ok) {
-        throw new Error(`Failed to fetch settings: ${settingsRes.statusText}`);
+      // Fetch settings (non-critical - don't fail if this one fails)
+      try {
+        const settingsRes = await fetch('/api/admin/settings', { headers });
+        if (settingsRes.ok) {
+          const settingsData = await settingsRes.json();
+          console.log('✅ [AdminDashboard] Settings fetched');
+          setNotificationsEnabled(settingsData?.notifications_enabled ?? true);
+        } else {
+          console.warn('⚠️ [AdminDashboard] Settings fetch failed, using defaults');
+          setNotificationsEnabled(true);
+        }
+      } catch (settingsError) {
+        console.warn('⚠️ [AdminDashboard] Settings error (non-critical):', settingsError);
+        setNotificationsEnabled(true); // Use default
       }
-      const settingsData = await settingsRes.json();
-      setNotificationsEnabled(settingsData?.notifications_enabled ?? true);
     } catch (error) {
-      console.error('Error fetching admin data:', error);
+      console.error('❌ [AdminDashboard] Error fetching data:', error);
       toast({
         title: 'Error',
         description: 'No pudimos cargar los datos',

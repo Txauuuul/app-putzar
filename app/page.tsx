@@ -123,7 +123,7 @@ export default function Home() {
                     <AccusationForm
                       onSuccess={() => {
                         setRefreshGallery((prev) => prev + 1);
-                        setTimeout(() => setActiveTab('galeria'), 1500);
+                        // ✅ NO cambiar de pestaña - el usuario prefiere quedarse aquí
                       }}
                     />
                   </div>
