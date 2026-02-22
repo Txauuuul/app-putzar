@@ -10,6 +10,8 @@ interface AdminTableProps {
 }
 
 export function AdminTable({ accusations, onDelete }: AdminTableProps) {
+  const accusationsList = Array.isArray(accusations) ? accusations : [];
+  
   return (
     <div className="overflow-x-auto rounded-lg border border-white/10">
       <table className="w-full">
@@ -30,14 +32,14 @@ export function AdminTable({ accusations, onDelete }: AdminTableProps) {
           </tr>
         </thead>
         <tbody className="divide-y divide-white/10">
-          {accusations.length === 0 ? (
+          {accusationsList.length === 0 ? (
             <tr>
               <td colSpan={4} className="px-6 py-8 text-center text-white/60">
                 No hay acusaciones aún
               </td>
             </tr>
           ) : (
-            accusations.map((accusation) => (
+            accusationsList.map((accusation) => (
               <tr
                 key={accusation.id}
                 className="hover:bg-white/5 transition-colors duration-200"

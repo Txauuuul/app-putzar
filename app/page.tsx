@@ -30,29 +30,26 @@ export default function Home() {
   }
 
   return (
-    <main className="w-full min-h-screen bg-black">
+    <main className="w-full min-h-screen bg-black flex flex-col items-center">
       {/* HEADER */}
-      <div className="border-b border-white/10 pt-24 pb-24 sm:pt-40 sm:pb-40 px-3 sm:px-6 lg:px-8 backdrop-blur-sm">
-        <div className="mx-auto max-w-4xl text-center">
-          {/* Título principal */}
-          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold font-playfair bg-gradient-to-r from-amber-400 via-yellow-300 to-amber-300 bg-clip-text text-transparent mb-20 sm:mb-24">
+      <div style={{ paddingTop: '40px', paddingBottom: '40px' }} className="w-full border-b border-white/10 px-3 sm:px-6 lg:px-8 backdrop-blur-sm flex flex-col items-center">
+        <div className="mx-auto max-w-4xl text-center flex flex-col items-center justify-center">
+          
+          <h1 style={{ marginBottom: '20px', paddingBottom: '15px', lineHeight: '1.2' }} className="text-4xl sm:text-5xl lg:text-7xl font-bold font-playfair bg-gradient-to-r from-amber-400 via-yellow-300 to-amber-300 bg-clip-text text-transparent">
             Putero & Zarigüeya 
           </h1>
 
-          {/* Párrafo 1 */}
-          <p className="text-white/60 text-sm sm:text-base lg:text-base leading-relaxed px-2 mb-6 sm:mb-8">
+          <p style={{ marginBottom: '15px' }} className="text-white/60 text-sm sm:text-base lg:text-lg leading-relaxed px-2 text-center max-w-2xl">
             En esta plataforma podréis hacer acusaciones a lo largo del año de manera anónima y aportar fotografías + acusaciones para una mayor veracidad.
           </p>
 
-          {/* Párrafo 2 */}
-          <p className="text-white/60 text-sm sm:text-base lg:text-base leading-relaxed px-2 mb-12 sm:mb-16">
+          <p style={{ marginBottom: '25px' }} className="text-white/60 text-sm sm:text-base lg:text-lg leading-relaxed px-2 text-center max-w-2xl">
             Todo para seguir haciendo que esta sea la mejor noche del puto año. 🎉
           </p>
 
-          {/* Badge */}
-          <div className="mb-0">
+          <div style={{ marginTop: '10px' }} className="flex justify-center w-full">
             <div className="inline-block bg-gradient-to-r from-amber-500/30 to-yellow-500/30 border border-amber-400/50 rounded-lg px-6 py-3 backdrop-blur-md">
-              <p className="text-amber-200 text-xs sm:text-sm font-semibold">
+              <p className="text-amber-200 text-sm sm:text-base font-semibold text-center">
                 🔐 Anonimato total • ⚡ Envíos directos • 📸 Sin límites
               </p>
             </div>
@@ -61,36 +58,40 @@ export default function Home() {
       </div>
 
       {/* MAIN CONTENT */}
-      <div className="mx-auto w-full max-w-4xl px-3 sm:px-6 lg:px-8 py-20 sm:py-32">
-        {/* TABS */}
-        <div className="mt-12 mb-16">
-          <div className="flex flex-col sm:flex-row gap-4 sm:gap-5">
+      <div style={{ paddingTop: '40px', paddingBottom: '60px' }} className="mx-auto w-full max-w-5xl px-3 sm:px-6 lg:px-8 flex flex-col items-center">
+        
+        {/* TABS - BOTONES CON RELLENO INTERIOR FORZADO */}
+        <div style={{ marginBottom: '40px' }} className="w-full max-w-4xl">
+          <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 justify-center">
             <button
               onClick={() => setActiveTab('acusacion')}
-              className={`flex-1 px-6 sm:px-8 py-5 sm:py-6 font-bold border-2 transition-all duration-300 rounded-lg text-base sm:text-lg ${
+              style={{ padding: '24px 32px' }}
+              className={`flex-1 font-bold border-2 transition-all duration-300 rounded-2xl text-base sm:text-lg text-center transform hover:-translate-y-1 active:scale-95 ${
                 activeTab === 'acusacion'
-                  ? 'bg-amber-500/20 border-amber-400 text-amber-300 shadow-lg shadow-amber-500/30'
-                  : 'border-white/20 text-white/70 hover:border-white/40 hover:text-white hover:bg-white/5'
+                  ? 'bg-amber-500/20 border-amber-400 text-amber-300 shadow-[0_0_25px_rgba(251,191,36,0.3)]'
+                  : 'border-white/10 text-white/60 hover:border-amber-400/50 hover:text-amber-200 hover:bg-amber-500/10 hover:shadow-[0_0_15px_rgba(251,191,36,0.2)]'
               }`}
             >
               📋 Enviar Acusación
             </button>
             <button
               onClick={() => setActiveTab('fotos')}
-              className={`flex-1 px-6 sm:px-8 py-5 sm:py-6 font-bold border-2 transition-all duration-300 rounded-lg text-base sm:text-lg ${
+              style={{ padding: '24px 32px' }}
+              className={`flex-1 font-bold border-2 transition-all duration-300 rounded-2xl text-base sm:text-lg text-center transform hover:-translate-y-1 active:scale-95 ${
                 activeTab === 'fotos'
-                  ? 'bg-purple-500/20 border-purple-400 text-purple-300 shadow-lg shadow-purple-500/30'
-                  : 'border-white/20 text-white/70 hover:border-white/40 hover:text-white hover:bg-white/5'
+                  ? 'bg-purple-500/20 border-purple-400 text-purple-300 shadow-[0_0_25px_rgba(192,132,252,0.3)]'
+                  : 'border-white/10 text-white/60 hover:border-purple-500/50 hover:text-purple-300 hover:bg-purple-500/10 hover:shadow-[0_0_15px_rgba(192,132,252,0.2)]'
               }`}
             >
               📸 Subir Fotos
             </button>
             <button
               onClick={() => setActiveTab('galeria')}
-              className={`flex-1 px-6 sm:px-8 py-5 sm:py-6 font-bold border-2 transition-all duration-300 rounded-lg text-base sm:text-lg ${
+              style={{ padding: '24px 32px' }}
+              className={`flex-1 font-bold border-2 transition-all duration-300 rounded-2xl text-base sm:text-lg text-center transform hover:-translate-y-1 active:scale-95 ${
                 activeTab === 'galeria'
-                  ? 'bg-cyan-500/20 border-cyan-400 text-cyan-300 shadow-lg shadow-cyan-500/30'
-                  : 'border-white/20 text-white/70 hover:border-white/40 hover:text-white hover:bg-white/5'
+                  ? 'bg-cyan-500/20 border-cyan-400 text-cyan-300 shadow-[0_0_25px_rgba(34,211,238,0.3)]'
+                  : 'border-white/10 text-white/60 hover:border-cyan-500/50 hover:text-cyan-300 hover:bg-cyan-500/10 hover:shadow-[0_0_15px_rgba(34,211,238,0.2)]'
               }`}
             >
               🖼️ Mi Galería
@@ -98,97 +99,95 @@ export default function Home() {
           </div>
         </div>
 
-        {/* TAB: ACUSACIÓN */}
-        {activeTab === 'acusacion' && (
-          <div className="animate-slideIn">
-            <div className="bg-white/5 border border-white/10 rounded-lg p-8 sm:p-12 backdrop-blur-sm">
-              {/* Título de sección */}
-              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white text-center mt-16 mb-8 sm:mb-12">
-                Envía Una Acusación
-              </h2>
+        {/* TAB CONTENEDOR GENERAL */}
+        <div className="w-full max-w-3xl flex flex-col items-center">
+          
+          {/* TAB: ACUSACIÓN */}
+          {activeTab === 'acusacion' && (
+            <div style={{ marginTop: '20px' }} className="animate-slideIn w-full">
+              <div style={{ padding: '30px 20px' }} className="bg-white/5 border border-white/10 rounded-xl backdrop-blur-sm flex flex-col items-center">
+                <h2 style={{ marginBottom: '20px' }} className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white text-center w-full">
+                  Envía Una Acusación
+                </h2>
 
-              {/* Descripción 1 */}
-              <p className="text-white/60 text-sm sm:text-base leading-relaxed text-center mb-4 sm:mb-6">
-                Escribe libremente tu acusación. Formato sugerido: "Acuso a [nombre] por [motivo]"
-              </p>
+                <p style={{ marginBottom: '15px' }} className="text-white/60 text-base sm:text-lg leading-relaxed text-center max-w-xl">
+                  Escribe libremente tu acusación.
+                </p>
 
-              {/* Descripción 2 */}
-              <p className="text-white/50 text-xs sm:text-sm text-center mb-12 sm:mb-16">
-                💡 Tu identidad está completamente protegida
-              </p>
+                <p style={{ marginBottom: '30px' }} className="text-white/50 text-sm sm:text-base text-center w-full">
+                  Tu identidad está completamente protegida
+                </p>
 
-              {/* Formulario */}
-              <div className="mt-8">
-                <AccusationForm
-                  onSuccess={() => {
-                    setRefreshGallery((prev) => prev + 1);
-                    setTimeout(() => setActiveTab('galeria'), 1500);
-                  }}
-                />
+                <div style={{ marginTop: '10px' }} className="w-full flex justify-center">
+                  <div className="w-full max-w-xl">
+                    <AccusationForm
+                      onSuccess={() => {
+                        setRefreshGallery((prev) => prev + 1);
+                        setTimeout(() => setActiveTab('galeria'), 1500);
+                      }}
+                    />
+                  </div>
+                </div>
               </div>
             </div>
-          </div>
-        )}
+          )}
 
-        {/* TAB: FOTOS */}
-        {activeTab === 'fotos' && (
-          <div className="animate-slideIn">
-            <div className="bg-white/5 border border-white/10 rounded-lg p-8 sm:p-12 backdrop-blur-sm">
-              {/* Título de sección */}
-              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white text-center mt-16 mb-8 sm:mb-12">
-                Sube Tus Fotos 📸
-              </h2>
+          {/* TAB: FOTOS */}
+          {activeTab === 'fotos' && (
+            <div style={{ marginTop: '20px' }} className="animate-slideIn w-full">
+              <div style={{ padding: '30px 20px' }} className="bg-white/5 border border-white/10 rounded-xl backdrop-blur-sm flex flex-col items-center">
+                <h2 style={{ marginBottom: '20px' }} className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white text-center w-full">
+                  Sube Tus Fotos 📸
+                </h2>
 
-              {/* Descripción 1 */}
-              <p className="text-white/60 text-sm sm:text-base leading-relaxed text-center mb-4 sm:mb-6">
-                Comparte fotografías sin límites. Todas se almacenan de forma segura y pueden ser comentadas.
-              </p>
+                <p style={{ marginBottom: '15px' }} className="text-white/60 text-base sm:text-lg leading-relaxed text-center max-w-xl">
+                  Comparte fotografías sin límites. Todas se almacenan de forma segura y pueden ser comentadas.
+                </p>
 
-              {/* Descripción 2 */}
-              <p className="text-white/50 text-xs sm:text-sm text-center mb-12 sm:mb-16">
-                ✨ Formato: JPG, PNG • Máximo 100MB por foto
-              </p>
+                <p style={{ marginBottom: '30px' }} className="text-white/50 text-sm sm:text-base text-center w-full">
+                  Formato: JPG, PNG • Máximo 100MB por foto
+                </p>
 
-              {/* Componente de carga */}
-              <div className="mt-8">
-                <PhotoUpload
-                  onSuccess={() => {
-                    setRefreshGallery((prev) => prev + 1);
-                    setTimeout(() => setActiveTab('galeria'), 1500);
-                  }}
-                />
+                <div style={{ marginTop: '10px' }} className="w-full flex justify-center">
+                  <div className="w-full max-w-xl">
+                    <PhotoUpload
+                      onSuccess={() => {
+                        setRefreshGallery((prev) => prev + 1);
+                        setTimeout(() => setActiveTab('galeria'), 1500);
+                      }}
+                    />
+                  </div>
+                </div>
               </div>
             </div>
-          </div>
-        )}
+          )}
 
-        {/* TAB: GALERÍA */}
-        {activeTab === 'galeria' && (
-          <div className="animate-slideIn">
-            <div className="bg-white/5 border border-white/10 rounded-lg p-8 sm:p-12 backdrop-blur-sm">
-              {/* Título de sección */}
-              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white text-center mt-16 mb-6 sm:mb-8">
-                Tu Galería Personal
-              </h2>
+          {/* TAB: GALERÍA */}
+          {activeTab === 'galeria' && (
+            <div style={{ marginTop: '20px' }} className="animate-slideIn w-full">
+              <div style={{ padding: '30px 20px' }} className="bg-white/5 border border-white/10 rounded-xl backdrop-blur-sm flex flex-col items-center">
+                <h2 style={{ marginBottom: '20px' }} className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white text-center w-full">
+                  Tu Galería Personal
+                </h2>
 
-              {/* Descripción */}
-              <p className="text-white/60 text-sm sm:text-base text-center mb-12 sm:mb-16">
-                Todas tus fotos subidas. Toca para agrandar y comentar.
-              </p>
+                <p style={{ marginBottom: '30px' }} className="text-white/60 text-base sm:text-lg text-center max-w-xl">
+                  Todas tus fotos subidas. Toca para agrandar y comentar.
+                </p>
 
-              {/* Galería */}
-              <div className="mt-8">
-                <Gallery key={refreshGallery} />
+                <div style={{ marginTop: '10px' }} className="w-full">
+                  <Gallery key={refreshGallery} />
+                </div>
               </div>
             </div>
-          </div>
-        )}
+          )}
+
+        </div>
       </div>
 
       {/* Floating Admin Link */}
       <a
         href="/admin"
-        className="fixed bottom-20 sm:bottom-6 right-3 sm:right-6 w-14 sm:w-12 h-14 sm:h-12 rounded-full bg-gradient-to-br from-amber-500 to-yellow-600 hover:from-amber-600 hover:to-yellow-700 flex items-center justify-center shadow-lg hover:shadow-amber-500/50 transition-all duration-300 text-white/80 hover:text-white text-lg sm:text-base hover:scale-110"
+        className="fixed bottom-20 sm:bottom-6 right-3 sm:right-6 w-14 sm:w-12 h-14 sm:h-12 rounded-full bg-gradient-to-br from-amber-500 to-yellow-600 hover:from-amber-600 hover:to-yellow-700 flex items-center justify-center shadow-lg hover:shadow-amber-500/50 transition-all duration-300 text-white/80 hover:text-white text-lg sm:text-base hover:scale-110 z-50"
         title="Ir a panel de administrador"
       >
         ⚙️

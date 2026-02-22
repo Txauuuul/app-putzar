@@ -30,18 +30,27 @@ export function AdminDashboard({ adminPin }: AdminDashboardProps) {
 
       // Fetch accusations
       const accusationsRes = await fetch('/api/admin/acusaciones', { headers });
+      if (!accusationsRes.ok) {
+        throw new Error(`Failed to fetch accusations: ${accusationsRes.statusText}`);
+      }
       const accusationsData = await accusationsRes.json();
-      setAccusations(accusationsData);
+      setAccusations(Array.isArray(accusationsData) ? accusationsData : []);
 
       // Fetch photos
       const photosRes = await fetch('/api/admin/fotos', { headers });
+      if (!photosRes.ok) {
+        throw new Error(`Failed to fetch photos: ${photosRes.statusText}`);
+      }
       const photosData = await photosRes.json();
-      setPhotos(photosData);
+      setPhotos(Array.isArray(photosData) ? photosData : []);
 
       // Fetch settings
       const settingsRes = await fetch('/api/admin/settings', { headers });
+      if (!settingsRes.ok) {
+        throw new Error(`Failed to fetch settings: ${settingsRes.statusText}`);
+      }
       const settingsData = await settingsRes.json();
-      setNotificationsEnabled(settingsData.notifications_enabled);
+      setNotificationsEnabled(settingsData?.notifications_enabled ?? true);
     } catch (error) {
       console.error('Error fetching admin data:', error);
       toast({
@@ -49,6 +58,9 @@ export function AdminDashboard({ adminPin }: AdminDashboardProps) {
         description: 'No pudimos cargar los datos',
         variant: 'destructive',
       });
+      // Set default empty arrays
+      setAccusations([]);
+      setPhotos([]);
     } finally {
       setLoading(false);
     }
@@ -128,18 +140,18 @@ export function AdminDashboard({ adminPin }: AdminDashboardProps) {
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
         <div className="bg-white/5 border border-white/10 rounded-lg p-6 backdrop-blur-sm hover:bg-white/10 transition-all duration-300">
           <div className="text-white/60 text-sm font-medium">Total Acusaciones</div>
-          <div className="text-4xl font-bold text-amber-400 mt-2">{accusations.length}</div>
+          <div className="text-4xl font-bold text-amber-400 mt-2">{Array.isArray(accusations) ? accusations.length : 0}</div>
         </div>
 
         <div className="bg-white/5 border border-white/10 rounded-lg p-6 backdrop-blur-sm hover:bg-white/10 transition-all duration-300">
           <div className="text-white/60 text-sm font-medium">Total Fotos</div>
-          <div className="text-4xl font-bold text-purple-400 mt-2">{photos.length}</div>
+          <div className="text-4xl font-bold text-purple-400 mt-2">{Array.isArray(photos) ? photos.length : 0}</div>
         </div>
 
         <div className="bg-white/5 border border-white/10 rounded-lg p-6 backdrop-blur-sm hover:bg-white/10 transition-all duration-300">
           <div className="text-white/60 text-sm font-medium">Usuarios Únicos</div>
           <div className="text-4xl font-bold text-cyan-400 mt-2">
-            {new Set(accusations.map((a) => a.user_id)).size}
+            {Array.isArray(accusations) ? new Set(accusations.map((a) => a.user_id)).size : 0}
           </div>
         </div>
 

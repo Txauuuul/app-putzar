@@ -12,7 +12,7 @@ interface AdminGalleryProps {
 
 export function AdminGallery({ photos, adminPin }: AdminGalleryProps) {
   const [selectedPhoto, setSelectedPhoto] = useState<string | null>(null);
-  const [photosList, setPhotosList] = useState<Photo[]>(photos);
+  const [photosList, setPhotosList] = useState<Photo[]>(Array.isArray(photos) ? photos : []);
   const { toast } = useToast();
 
   const handleDeletePhoto = async (photoId: string) => {
