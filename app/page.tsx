@@ -21,10 +21,10 @@ export default function Home() {
 
   if (!isInitialized) {
     return (
-      <div className="flex items-center justify-center min-h-screen">
-        <div className="text-center">
-          <div className="w-16 h-16 border-4 border-amber-500 border-t-transparent rounded-full animate-spin mx-auto mb-4" />
-          <p className="text-white/60">Inicializando...</p>
+      <div className="w-full h-screen bg-black flex items-center justify-center">
+        <div className="flex flex-col items-center justify-center gap-6">
+          <div className="w-16 h-16 border-4 border-amber-500 border-t-transparent rounded-full animate-spin" />
+          <p className="text-white/60 text-base font-medium">Inicializando...</p>
         </div>
       </div>
     );
@@ -47,9 +47,11 @@ export default function Home() {
             </p>
           </div>
           <div className="pt-4">
-            <p className="text-white/60 text-xs sm:text-sm">
-              🔐 Anonimato total • ⚡ Envíos directos • 📸 Sin límites
-            </p>
+            <div className="inline-block bg-gradient-to-r from-amber-500/30 to-yellow-500/30 border border-amber-400/50 rounded-lg px-6 py-3 backdrop-blur-md">
+              <p className="text-amber-200 text-sm sm:text-base font-semibold">
+                🔐 Anonimato total • ⚡ Envíos directos • 📸 Sin límites
+              </p>
+            </div>
           </div>
         </div>
       </div>
