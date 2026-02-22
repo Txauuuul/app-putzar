@@ -46,60 +46,57 @@ export default function AdminPage() {
 
   if (loading) {
     return (
-      <div className="flex items-center justify-center min-h-screen">
-        <div className="text-center">
-          <div className="w-16 h-16 border-4 border-amber-500 border-t-transparent rounded-full animate-spin mx-auto mb-4" />
-          <p className="text-white/60">Cargando...</p>
-        </div>
+      <div className="flex flex-col items-center justify-center min-h-screen bg-black">
+        <div className="w-16 h-16 border-4 border-amber-500 border-t-transparent rounded-full animate-spin mb-6" />
+        <p className="text-white/60 text-lg font-medium">Verificando acceso...</p>
       </div>
     );
   }
 
   if (!isAuthenticated) {
     return (
-      <div className="flex items-center justify-center min-h-screen px-4">
+      <div className="flex flex-col items-center justify-center min-h-screen px-4 bg-black">
         <form
           onSubmit={handleSubmit}
-          className="w-full max-w-md space-y-6 bg-white/5 border border-white/10 rounded-lg p-8 backdrop-blur-sm"
+          style={{ padding: '50px 40px' }}
+          className="w-full max-w-md flex flex-col items-center bg-white/5 border border-white/10 rounded-2xl backdrop-blur-md shadow-[0_0_40px_rgba(0,0,0,0.5)]"
         >
-          <div className="text-center space-y-2">
-            <h1 className="text-3xl font-bold font-playfair bg-gradient-to-r from-amber-400 to-yellow-400 bg-clip-text text-transparent">
+          <div className="text-center mb-8 w-full">
+            <h1 style={{ marginBottom: '15px', paddingBottom: '10px' }} className="text-4xl sm:text-5xl font-bold font-playfair bg-gradient-to-r from-amber-400 to-yellow-400 bg-clip-text text-transparent">
               🔐 Panel Admin
             </h1>
-            <p className="text-white/60">Ingresa la contraseña para continuar</p>
+            <p className="text-white/60 text-base">Ingresa la contraseña para continuar</p>
           </div>
 
           {error && (
-            <div className="bg-red-500/10 border border-red-500/20 rounded-lg p-4 text-red-200 text-sm">
+            <div className="w-full bg-red-500/10 border border-red-500/20 rounded-lg p-4 text-red-200 text-sm text-center mb-6 animate-fadeIn">
               {error}
             </div>
           )}
 
-          <div>
-            <label htmlFor="pin" className="block text-sm font-medium text-white mb-2">
-              Contraseña
-            </label>
+          <div className="w-full mb-8">
             <Input
               id="pin"
               type="password"
               value={pin}
               onChange={(e) => setPin(e.target.value)}
-              placeholder="Ingresa la contraseña"
-              className="w-full"
+              placeholder="••••••••"
+              className="w-full bg-black/50 border-white/20 text-white text-center text-2xl py-6 rounded-xl focus:border-amber-500 focus:ring-amber-500 transition-all"
               autoFocus
             />
           </div>
 
           <Button
             type="submit"
-            className="w-full bg-gradient-to-r from-amber-500 to-yellow-500 hover:from-amber-600 hover:to-yellow-600 text-black font-bold py-3 rounded-lg"
+            style={{ padding: '24px 32px' }}
+            className="w-full bg-gradient-to-r from-amber-500 to-yellow-600 hover:from-amber-600 hover:to-yellow-700 text-white font-bold text-lg rounded-xl transform hover:-translate-y-1 active:scale-95 transition-all shadow-[0_0_20px_rgba(251,191,36,0.2)] mb-8"
           >
-            Acceder
+            Acceder al Panel
           </Button>
 
           <a
             href="/"
-            className="block text-center text-white/60 hover:text-white transition-colors text-sm"
+            className="block text-center text-white/50 hover:text-white transition-colors text-sm font-medium"
           >
             ← Volver al inicio
           </a>
@@ -109,15 +106,15 @@ export default function AdminPage() {
   }
 
   return (
-    <main className="min-h-screen pb-20">
-      {/* Header */}
-      <div className="border-b border-white/10 py-8 px-4 sm:px-6 lg:px-8 backdrop-blur-sm">
-        <div className="mx-auto max-w-6xl flex justify-between items-center">
-          <div>
-            <h1 className="text-3xl sm:text-4xl font-bold font-playfair bg-gradient-to-r from-amber-400 to-yellow-400 bg-clip-text text-transparent">
+    <main className="w-full min-h-screen bg-black flex flex-col items-center pb-20">
+      {/* Header Centrado */}
+      <div style={{ paddingTop: '40px', paddingBottom: '40px' }} className="w-full border-b border-white/10 px-4 sm:px-6 lg:px-8 backdrop-blur-sm flex flex-col items-center">
+        <div className="w-full max-w-5xl flex flex-col sm:flex-row justify-between items-center gap-6">
+          <div className="text-center sm:text-left">
+            <h1 className="text-3xl sm:text-4xl font-bold font-playfair bg-gradient-to-r from-amber-400 to-yellow-400 bg-clip-text text-transparent mb-2">
               🔐 Panel de Control
             </h1>
-            <p className="text-white/60 mt-1">Gestión de la Gala</p>
+            <p className="text-white/60 text-sm sm:text-base">Gestión integral de la Gala</p>
           </div>
           <Button
             onClick={() => {
@@ -125,16 +122,18 @@ export default function AdminPage() {
               setPin('');
               router.push('/');
             }}
-            className="bg-red-500/20 text-red-400 hover:bg-red-500/30 text-sm"
+            className="bg-red-500/10 border border-red-500/30 text-red-400 hover:bg-red-500/20 hover:text-red-300 text-sm px-6 py-5 rounded-xl transition-all"
           >
             Cerrar sesión
           </Button>
         </div>
       </div>
 
-      {/* Dashboard Content */}
-      <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8 py-8">
-        <AdminDashboard adminPin={pin} />
+      {/* Dashboard Content Centrado */}
+      <div style={{ paddingTop: '60px' }} className="w-full max-w-5xl px-4 sm:px-6 lg:px-8 flex flex-col items-center">
+        <div className="w-full">
+          <AdminDashboard adminPin={pin} />
+        </div>
       </div>
     </main>
   );
