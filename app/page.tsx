@@ -63,7 +63,7 @@ export default function Home() {
       {/* MAIN CONTENT */}
       <div className="mx-auto w-full max-w-4xl px-3 sm:px-6 lg:px-8 py-20 sm:py-32">
         {/* TABS */}
-        <div className="mb-24 sm:mb-32">
+        <div className="mt-12 mb-16">
           <div className="flex flex-col sm:flex-row gap-4 sm:gap-5">
             <button
               onClick={() => setActiveTab('acusacion')}
@@ -103,7 +103,7 @@ export default function Home() {
           <div className="animate-slideIn">
             <div className="bg-white/5 border border-white/10 rounded-lg p-8 sm:p-12 backdrop-blur-sm">
               {/* Título de sección */}
-              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white text-center mb-8 sm:mb-12">
+              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white text-center mt-16 mb-8 sm:mb-12">
                 Envía Una Acusación
               </h2>
 
@@ -118,7 +118,7 @@ export default function Home() {
               </p>
 
               {/* Formulario */}
-              <div className="mt-8 sm:mt-12">
+              <div className="mt-8">
                 <AccusationForm
                   onSuccess={() => {
                     setRefreshGallery((prev) => prev + 1);
@@ -135,7 +135,7 @@ export default function Home() {
           <div className="animate-slideIn">
             <div className="bg-white/5 border border-white/10 rounded-lg p-8 sm:p-12 backdrop-blur-sm">
               {/* Título de sección */}
-              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white text-center mb-8 sm:mb-12">
+              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white text-center mt-16 mb-8 sm:mb-12">
                 Sube Tus Fotos 📸
               </h2>
 
@@ -150,7 +150,7 @@ export default function Home() {
               </p>
 
               {/* Componente de carga */}
-              <div className="mt-8 sm:mt-12">
+              <div className="mt-8">
                 <PhotoUpload
                   onSuccess={() => {
                     setRefreshGallery((prev) => prev + 1);
@@ -167,7 +167,7 @@ export default function Home() {
           <div className="animate-slideIn">
             <div className="bg-white/5 border border-white/10 rounded-lg p-8 sm:p-12 backdrop-blur-sm">
               {/* Título de sección */}
-              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white text-center mb-6 sm:mb-8">
+              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white text-center mt-16 mb-6 sm:mb-8">
                 Tu Galería Personal
               </h2>
 
@@ -177,7 +177,7 @@ export default function Home() {
               </p>
 
               {/* Galería */}
-              <div className="mt-8 sm:mt-12">
+              <div className="mt-8">
                 <Gallery key={refreshGallery} />
               </div>
             </div>

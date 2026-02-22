@@ -47,7 +47,7 @@ export default function RootLayout({
         <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
         <meta name="apple-mobile-web-app-title" content="La Gala" />
       </head>
-      <body className={`${inter.className} ${playfair.variable} bg-gradient-to-br from-slate-950 via-black to-slate-900 min-h-screen text-white flex flex-col`}>
+      <body className={`${inter.className} ${playfair.variable} bg-gradient-to-br from-slate-950 via-black to-slate-900 min-h-screen text-white`}>
         {/* Background decoration */}
         <div className="fixed inset-0 opacity-30">
           <div className="absolute top-0 right-0 w-96 h-96 bg-amber-500 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob" />
@@ -56,7 +56,7 @@ export default function RootLayout({
         </div>
 
         {/* Content */}
-        <div className="relative z-10 flex-1 flex flex-col w-full">
+        <div className="relative z-10">
           {children}
         </div>
       </body>
